@@ -1,14 +1,16 @@
 <section>
-  <div class="section-header">
-    <div>
-      <h2>Album View</h2>
-      <p class="muted" *ngIf="album">{{ album.name }} · {{ album.id }}</p>
-    </div>
-    <div class="pagination">
-      <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
-      <span>Page {{ page }}</span>
-      <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
-    </div>
+  <a class="back-link" routerLink="/albums">
+    <span class="icon">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 6 9 12l6 6" fill="none" stroke="currentColor" stroke-width="1.6" />
+      </svg>
+    </span>
+    Back to Albums
+  </a>
+
+  <div class="section-title">
+    <h2>{{ album?.name || 'Album' }}</h2>
+    <p class="muted">{{ photos.length }} images</p>
   </div>
 
   <p class="error" *ngIf="error">{{ error }}</p>
@@ -17,12 +19,10 @@
     <table>
       <thead>
         <tr>
-          <th>Photo</th>
-          <th>ID</th>
+          <th>Thumbnail</th>
           <th>Likes</th>
           <th>Dislikes</th>
           <th>Actions</th>
-          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -35,19 +35,59 @@
               (click)="openPreview(photo.url)"
             />
           </td>
-          <td class="mono">{{ photo.id }}</td>
-          <td>{{ photo.likes }}</td>
-          <td>{{ photo.dislikes }}</td>
           <td>
-            <button class="secondary" (click)="react(photo.id, true)" [disabled]="!canReact">Like</button>
-            <button class="secondary" (click)="react(photo.id, false)" [disabled]="!canReact">Dislike</button>
+            <span class="count like">{{ photo.likes }}</span>
           </td>
           <td>
-            <button class="danger" (click)="deletePhoto(photo.id)" [disabled]="!canDelete">Delete</button>
+            <span class="count dislike">{{ photo.dislikes }}</span>
+          </td>
+          <td class="actions">
+            <button class="btn ghost" (click)="react(photo.id, true)" [disabled]="!canReact">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M7 11V20H4v-9h3Zm3-5 1-3a2 2 0 0 1 2-1.4h.4a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2l-2 8a2 2 0 0 1-2 1.5H10V6Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                  />
+                </svg>
+              </span>
+              Like
+            </button>
+            <button class="btn ghost" (click)="react(photo.id, false)" [disabled]="!canReact">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M17 13v-9h3v9h-3ZM14 18l-1 3a2 2 0 0 1-2 1.4h-.4a2 2 0 0 1-2-2v-3H5a2 2 0 0 1-2-2l2-8a2 2 0 0 1 2-1.5h7v12Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                  />
+                </svg>
+              </span>
+              Dislike
+            </button>
+            <button class="btn danger" (click)="deletePhoto(photo.id)" [disabled]="!canDelete">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h16" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <rect x="6" y="7" width="12" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6" />
+                </svg>
+              </span>
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="pagination">
+    <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
+    <span>Page {{ page }}</span>
+    <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
   </div>
 </section>
 

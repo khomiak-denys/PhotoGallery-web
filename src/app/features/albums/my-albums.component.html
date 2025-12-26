@@ -1,17 +1,9 @@
 <section>
-  <div class="section-header">
-    <div>
-      <h2>My Albums</h2>
-      <p class="muted">Створюйте власні альбоми або керуйте існуючими.</p>
-    </div>
-    <div class="pagination">
-      <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
-      <span>Page {{ page }}</span>
-      <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
-    </div>
+  <div class="section-title">
+    <h2>My Albums</h2>
   </div>
 
-  <div class="row">
+  <div class="create-row">
     <div>
       <label>New album name</label>
       <input [(ngModel)]="newAlbumName" placeholder="City nights" />
@@ -27,10 +19,10 @@
       <thead>
         <tr>
           <th>Cover</th>
-          <th>Name</th>
-          <th>ID</th>
-          <th>Open</th>
-          <th>Manage</th>
+          <th>Title</th>
+          <th>Images</th>
+          <th>Created</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -38,16 +30,43 @@
           <td>
             <img class="thumb" [src]="album.coverUrl" alt="cover" />
           </td>
-          <td>{{ album.name }}</td>
-          <td class="mono">{{ album.id }}</td>
-          <td>
-            <a class="link" [routerLink]="['/albums', album.id]">View</a>
-          </td>
-          <td>
-            <button class="danger" (click)="deleteAlbum(album.id)">Delete</button>
+          <td class="title-cell">{{ album.name }}</td>
+          <td class="muted">—</td>
+          <td class="muted">—</td>
+          <td class="actions">
+            <a class="btn btn-primary" [routerLink]="['/albums', album.id]">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+                </svg>
+              </span>
+              View
+            </a>
+            <button class="btn btn-danger" (click)="deleteAlbum(album.id)">
+              <span class="icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 7h16" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <path d="M9 7V5h6v2" fill="none" stroke="currentColor" stroke-width="1.6" />
+                  <rect x="6" y="7" width="12" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.6" />
+                </svg>
+              </span>
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="pagination">
+    <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
+    <span>Page {{ page }}</span>
+    <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
   </div>
 </section>
