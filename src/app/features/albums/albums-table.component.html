@@ -1,0 +1,44 @@
+<section>
+  <div class="section-header">
+    <div>
+      <h2>Albums</h2>
+      <p class="muted">Усі альбоми з першою обкладинкою.</p>
+    </div>
+    <div class="pagination">
+      <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
+      <span>Page {{ page }}</span>
+      <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
+    </div>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Name</th>
+          <th>ID</th>
+          <th>Open</th>
+          <th *ngIf="isAdmin">Admin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let album of albums">
+          <td>
+            <img class="thumb" [src]="album.coverUrl" alt="cover" />
+          </td>
+          <td>{{ album.name }}</td>
+          <td class="mono">{{ album.id }}</td>
+          <td>
+            <a class="link" [routerLink]="['/albums', album.id]">View</a>
+          </td>
+          <td *ngIf="isAdmin">
+            <button class="danger" (click)="deleteAlbum(album.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

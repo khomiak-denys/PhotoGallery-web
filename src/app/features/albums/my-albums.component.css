@@ -1,0 +1,32 @@
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.thumb {
+  width: 64px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #d8dee6;
+}
+
+.link {
+  color: #1b4dd8;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mono {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+}

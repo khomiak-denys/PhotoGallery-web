@@ -1,0 +1,59 @@
+<section>
+  <div class="section-header">
+    <div>
+      <h2>Album View</h2>
+      <p class="muted" *ngIf="album">{{ album.name }} · {{ album.id }}</p>
+    </div>
+    <div class="pagination">
+      <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
+      <span>Page {{ page }}</span>
+      <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
+    </div>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>ID</th>
+          <th>Likes</th>
+          <th>Dislikes</th>
+          <th>Actions</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let photo of photos">
+          <td>
+            <img
+              class="thumb clickable"
+              [src]="photo.url"
+              alt="thumbnail"
+              (click)="openPreview(photo.url)"
+            />
+          </td>
+          <td class="mono">{{ photo.id }}</td>
+          <td>{{ photo.likes }}</td>
+          <td>{{ photo.dislikes }}</td>
+          <td>
+            <button class="secondary" (click)="react(photo.id, true)" [disabled]="!canReact">Like</button>
+            <button class="secondary" (click)="react(photo.id, false)" [disabled]="!canReact">Dislike</button>
+          </td>
+          <td>
+            <button class="danger" (click)="deletePhoto(photo.id)" [disabled]="!canDelete">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="overlay" *ngIf="selectedUrl" (click)="closePreview()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <img [src]="selectedUrl" alt="full" />
+    <button class="secondary" (click)="closePreview()">Close</button>
+  </div>
+</div>

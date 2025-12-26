@@ -1,0 +1,192 @@
+{
+  "basePath": "/api/v1",
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/auth/register",
+      "auth": "anonymous",
+      "request": {
+        "body": {
+          "firstName": "string",
+          "lastName": "string",
+          "login": "string",
+          "password": "string"
+        }
+      },
+      "responses": [
+        { "status": 201, "description": "Created" },
+        { "status": 400, "description": "Validation error" },
+        { "status": 409, "description": "User already exists" }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/auth/login",
+      "auth": "anonymous",
+      "request": {
+        "body": {
+          "login": "string",
+          "password": "string"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": {
+            "token": "string"
+          }
+        },
+        { "status": 400, "description": "Validation error" }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/albums",
+      "auth": "anonymous",
+      "request": {
+        "query": {
+          "page": "int",
+          "pageSize": "int"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": [
+            { "id": "guid", "name": "string", "coverUrl": "string" }
+          ]
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/albums/my",
+      "auth": "bearer",
+      "request": {
+        "query": {
+          "page": "int",
+          "pageSize": "int"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": [
+            { "id": "guid", "name": "string", "coverUrl": "string" }
+          ]
+        },
+        { "status": 401, "description": "Unauthorized" }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/albums/{id}",
+      "auth": "anonymous",
+      "request": {
+        "path": {
+          "id": "guid"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": { "id": "guid", "name": "string", "coverUrl": "string" }
+        },
+        { "status": 404, "description": "Album not found" }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/albums",
+      "auth": "bearer",
+      "request": {
+        "body": {
+          "name": "string"
+        }
+      },
+      "responses": [
+        {
+          "status": 201,
+          "body": {
+            "id": "guid"
+          },
+          "headers": {
+            "location": "/api/v1/albums/{id}"
+          }
+        },
+        { "status": 400, "description": "Validation error" },
+        { "status": 401, "description": "Unauthorized" }
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/albums/{id}",
+      "auth": "bearer",
+      "request": {
+        "path": {
+          "id": "guid"
+        }
+      },
+      "responses": [
+        { "status": 204, "description": "Deleted" },
+        { "status": 401, "description": "Unauthorized" },
+        { "status": 403, "description": "Forbidden" },
+        { "status": 404, "description": "Album not found" }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/photos",
+      "auth": "anonymous",
+      "request": {
+        "query": {
+          "page": "int",
+          "pageSize": "int"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": [
+            { "id": "guid", "url": "string" }
+          ]
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/photos/{id}",
+      "auth": "anonymous",
+      "request": {
+        "path": {
+          "id": "guid"
+        }
+      },
+      "responses": [
+        {
+          "status": 200,
+          "body": { "id": "guid", "url": "string" }
+        },
+        { "status": 404, "description": "Photo not found" }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/photos/{id}/like",
+      "auth": "bearer",
+      "request": {
+        "path": {
+          "id": "guid"
+        },
+        "body": {
+          "isPositive": "bool"
+        }
+      },
+      "responses": [
+        { "status": 204, "description": "Liked" },
+        { "status": 401, "description": "Unauthorized" },
+        { "status": 404, "description": "Photo not found" }
+      ]
+    }
+  ]
+}

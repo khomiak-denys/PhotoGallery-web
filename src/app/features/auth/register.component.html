@@ -1,0 +1,27 @@
+<section class="auth-card">
+  <div>
+    <h2>Register</h2>
+    <p class="muted">Створіть аккаунт, щоб керувати власними альбомами.</p>
+  </div>
+  <div class="row">
+    <div>
+      <label>First name</label>
+      <input [(ngModel)]="form.firstName" placeholder="John" />
+    </div>
+    <div>
+      <label>Last name</label>
+      <input [(ngModel)]="form.lastName" placeholder="Doe" />
+    </div>
+    <div>
+      <label>Login</label>
+      <input [(ngModel)]="form.login" placeholder="john" />
+    </div>
+    <div>
+      <label>Password</label>
+      <input type="password" [(ngModel)]="form.password" />
+    </div>
+    <button (click)="submit()">Create account</button>
+  </div>
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <p *ngIf="message">{{ message }}</p>
+</section>

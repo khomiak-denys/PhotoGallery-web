@@ -1,0 +1,53 @@
+<section>
+  <div class="section-header">
+    <div>
+      <h2>My Albums</h2>
+      <p class="muted">Створюйте власні альбоми або керуйте існуючими.</p>
+    </div>
+    <div class="pagination">
+      <button class="secondary" (click)="prev()" [disabled]="page === 1">Prev</button>
+      <span>Page {{ page }}</span>
+      <button class="secondary" (click)="next()" [disabled]="!canNext">Next</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label>New album name</label>
+      <input [(ngModel)]="newAlbumName" placeholder="City nights" />
+    </div>
+    <button (click)="create()">Create album</button>
+  </div>
+
+  <p class="error" *ngIf="error">{{ error }}</p>
+  <p *ngIf="message">{{ message }}</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Name</th>
+          <th>ID</th>
+          <th>Open</th>
+          <th>Manage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let album of albums">
+          <td>
+            <img class="thumb" [src]="album.coverUrl" alt="cover" />
+          </td>
+          <td>{{ album.name }}</td>
+          <td class="mono">{{ album.id }}</td>
+          <td>
+            <a class="link" [routerLink]="['/albums', album.id]">View</a>
+          </td>
+          <td>
+            <button class="danger" (click)="deleteAlbum(album.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

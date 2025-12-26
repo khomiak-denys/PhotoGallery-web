@@ -1,0 +1,17 @@
+<section class="auth-shell">
+  <div class="auth-card">
+    <h2>Photo Albums</h2>
+    <div class="field">
+      <label>Username</label>
+      <input [(ngModel)]="loginForm.login" placeholder="Enter username" />
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input type="password" [(ngModel)]="loginForm.password" placeholder="Enter password" />
+    </div>
+    <button class="primary" (click)="login()">Login</button>
+    <a class="ghost" routerLink="/register">Register</a>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p *ngIf="message">{{ message }}</p>
+  </div>
+</section>

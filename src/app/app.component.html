@@ -1,0 +1,58 @@
+<main>
+  <header class="app-header">
+    <nav class="nav">
+      <a routerLink="/albums" routerLinkActive="active">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4 5.5c0-.83.67-1.5 1.5-1.5H11l2 2h5.5c.83 0 1.5.67 1.5 1.5V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18V5.5Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path d="M8.5 11.5 11 14l4.5-4.5" fill="none" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </span>
+        All Albums
+      </a>
+      <a routerLink="/my-albums" routerLinkActive="active">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M4 6c0-1.1.9-2 2-2h6l2 2h6a2 2 0 0 1 2 2v8.5A2.5 2.5 0 0 1 19.5 19h-13A2.5 2.5 0 0 1 4 16.5V6Z"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+          </svg>
+        </span>
+        My Albums
+      </a>
+    </nav>
+    <div class="spacer"></div>
+    <div class="user-area">
+      <a class="login-link" routerLink="/login" *ngIf="!profile">Login</a>
+      <div class="user-pill" *ngIf="profile">
+        <span class="user-name">{{ profile.login }}</span>
+        <span class="role-badge">{{ role || 'User' }}</span>
+      </div>
+      <button class="link-button" (click)="logout()" *ngIf="profile">
+        <span class="icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M15 4h2a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-2"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path d="M10 17 15 12 10 7" fill="none" stroke="currentColor" stroke-width="1.6" />
+            <path d="M4 12h11" fill="none" stroke="currentColor" stroke-width="1.6" />
+          </svg>
+        </span>
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <router-outlet></router-outlet>
+</main>
