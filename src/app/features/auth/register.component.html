@@ -1,27 +1,28 @@
-<section class="auth-card">
-  <div>
-    <h2>Register</h2>
-    <p class="muted">Створіть аккаунт, щоб керувати власними альбомами.</p>
+<section class="auth-shell">
+  <div class="auth-card">
+    <div class="section-title">
+      <h2>Register</h2>
+    </div>
+    <div class="field-grid">
+      <div class="field">
+        <label>First name</label>
+        <input [(ngModel)]="form.firstName" placeholder="John" />
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input [(ngModel)]="form.lastName" placeholder="Doe" />
+      </div>
+      <div class="field">
+        <label>Login</label>
+        <input [(ngModel)]="form.login" placeholder="john" />
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" [(ngModel)]="form.password" placeholder="••••••••" />
+      </div>
+    </div>
+    <button class="primary" (click)="submit()">Create account</button>
+    <p class="error" *ngIf="error">{{ error }}</p>
+    <p *ngIf="message">{{ message }}</p>
   </div>
-  <div class="row">
-    <div>
-      <label>First name</label>
-      <input [(ngModel)]="form.firstName" placeholder="John" />
-    </div>
-    <div>
-      <label>Last name</label>
-      <input [(ngModel)]="form.lastName" placeholder="Doe" />
-    </div>
-    <div>
-      <label>Login</label>
-      <input [(ngModel)]="form.login" placeholder="john" />
-    </div>
-    <div>
-      <label>Password</label>
-      <input type="password" [(ngModel)]="form.password" />
-    </div>
-    <button (click)="submit()">Create account</button>
-  </div>
-  <p class="error" *ngIf="error">{{ error }}</p>
-  <p *ngIf="message">{{ message }}</p>
 </section>

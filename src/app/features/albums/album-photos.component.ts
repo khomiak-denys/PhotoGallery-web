@@ -16,6 +16,9 @@ export class AlbumPhotosComponent {
   album: Album | null = null;
   photos: AlbumPhoto[] = [];
   error = '';
+  uploadError = '';
+  uploadSuccess = '';
+  uploading = false;
   page = 1;
   readonly pageSize = 5;
   canNext = true;
@@ -38,6 +41,10 @@ export class AlbumPhotosComponent {
   }
 
   get canDelete(): boolean {
+    return this.auth.isLoggedIn();
+  }
+
+  get canUpload(): boolean {
     return this.auth.isLoggedIn();
   }
 
@@ -103,5 +110,54 @@ export class AlbumPhotosComponent {
 
   closePreview(): void {
     this.selectedUrl = null;
+  }
+
+  onFileSelected(event: Event): void {
+    if (!this.canUpload || this.uploading) {
+      return;
+    }
+
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    if (!file) {
+      return;
+    }
+
+    this.uploadError = '';
+    this.uploadSuccess = '';
+    this.uploading = true;
+
+    const contentType = file.type || 'application/octet-stream';
+
+    this.api.requestAlbumPhotoUpload(this.albumId, file.name, contentType).subscribe({
+      next: async (response) => {
+        try {
+          const uploadResponse = await fetch(response.uploadUrl, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': contentType
+            },
+            body: file
+          });
+
+          if (!uploadResponse.ok) {
+            throw new Error('Upload failed');
+          }
+
+          this.uploadSuccess = 'Фото завантажено.';
+          this.loadPhotos(this.albumId);
+        } catch {
+          this.uploadError = 'Не вдалося завантажити фото.';
+        } finally {
+          this.uploading = false;
+          input.value = '';
+        }
+      },
+      error: () => {
+        this.uploadError = 'Не вдалося отримати URL для завантаження.';
+        this.uploading = false;
+        input.value = '';
+      }
+    });
   }
 }

@@ -7,17 +7,16 @@
 .auth-card {
   width: min(520px, 100%);
   background: #fff;
-  border-radius: 18px;
-  padding: 28px 30px 32px;
-  border: 1px solid #e3e8ef;
-  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  border-radius: 12px;
+  padding: 22px 24px 26px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
   display: grid;
   gap: 18px;
 }
 
 .auth-card h2 {
-  text-align: center;
-  font-size: 26px;
+  font-size: 20px;
   margin: 0;
 }
 
@@ -28,14 +27,14 @@
 
 .field input {
   height: 48px;
-  border-radius: 14px;
-  border: 1px solid #c7d0dd;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
   padding: 0 14px;
 }
 
 .primary {
   height: 52px;
-  border-radius: 14px;
+  border-radius: 10px;
   font-size: 16px;
 }
 
@@ -44,6 +43,11 @@
   text-decoration: none;
   font-weight: 600;
   color: #1d4ed8;
+}
+
+.section-title {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .login-info {

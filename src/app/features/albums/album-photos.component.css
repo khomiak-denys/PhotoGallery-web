@@ -14,9 +14,18 @@
   margin-bottom: 12px;
 }
 
-.pagination {
-  display: inline-flex;
+.upload-row {
+  display: flex;
   align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-top: 16px;
 }
@@ -52,6 +61,24 @@
   color: #111827;
 }
 
+.btn.upload {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn.upload input[type='file'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.btn.upload.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .btn.ghost:disabled {
   opacity: 0.6;
 }
@@ -85,6 +112,19 @@
 .icon svg {
   width: 16px;
   height: 16px;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.status.success {
+  color: #16a34a;
+}
+
+.status.error {
+  color: #dc2626;
 }
 
 .overlay {

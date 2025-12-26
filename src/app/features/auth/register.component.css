@@ -1,4 +1,45 @@
-.auth-card {
+.auth-shell {
+  min-height: 60vh;
   display: grid;
-  gap: 16px;
+  place-items: center;
+}
+
+.auth-card {
+  width: min(560px, 100%);
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 24px 26px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  display: grid;
+  gap: 18px;
+}
+
+.section-title {
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.field label {
+  font-size: 14px;
+  color: #344054;
+}
+
+.field input {
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  padding: 0 14px;
+}
+
+.primary {
+  height: 52px;
+  border-radius: 10px;
+  font-size: 16px;
 }

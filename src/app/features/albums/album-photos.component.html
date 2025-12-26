@@ -13,6 +13,15 @@
     <p class="muted">{{ photos.length }} images</p>
   </div>
 
+  <div class="upload-row" *ngIf="canUpload">
+    <label class="btn upload" [class.disabled]="uploading">
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" [disabled]="uploading" />
+      <span>{{ uploading ? 'Uploading...' : 'Upload photo' }}</span>
+    </label>
+    <span class="status success" *ngIf="uploadSuccess">{{ uploadSuccess }}</span>
+    <span class="status error" *ngIf="uploadError">{{ uploadError }}</span>
+  </div>
+
   <p class="error" *ngIf="error">{{ error }}</p>
 
   <div class="table-wrap">

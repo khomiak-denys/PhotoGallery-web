@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { API_BASE_PATH } from '../config/api.config';
-import { Album, AlbumPhoto, PageQuery, Photo } from '../../shared/models';
+import { Album, AlbumPhoto, PageQuery, Photo, PhotoUploadResponse } from '../../shared/models';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +56,13 @@ export class ApiService {
 
   deletePhoto(id: string): Observable<void> {
     return this.http.delete<void>(`${API_BASE_PATH}/photos/${id}`);
+  }
+
+  requestAlbumPhotoUpload(id: string, fileName: string, contentType: string): Observable<PhotoUploadResponse> {
+    return this.http.post<PhotoUploadResponse>(`${API_BASE_PATH}/albums/${id}/photos/upload`, {
+      fileName,
+      contentType
+    });
   }
 
   private pageParams(query: PageQuery): HttpParams {

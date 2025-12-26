@@ -28,3 +28,9 @@ export interface PageQuery {
   page: number;
   pageSize: number;
 }
+
+export interface PhotoUploadResponse {
+  photoId: string;
+  objectKey: string;
+  uploadUrl: string;
+}
